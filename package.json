@@ -18,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/rit-rit/AttendanceManagementViewer/issues"
   },
-  "homepage": "https://github.com/rit-rit/AttendanceManagementViewer#readme"
+  "homepage": "https://github.com/rit-rit/AttendanceManagementViewer#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "prettier": "^1.13.5",
+    "typescript": "^2.9.2",
+    "vue": "^2.5.16",
+    "vue-class-component": "^6.2.0",
+    "vue-loader": "^15.2.4",
+    "webpack": "^4.12.0"
+  }
 }
