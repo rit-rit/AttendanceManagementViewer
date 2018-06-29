@@ -1,10 +1,10 @@
 const path = require("path");
 const webpack = require("webpack");
-const StringReplacePluing = require("string-replace-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = env => {
   return {
-    entry: "src/ts/main.ts",
+    entry: "./src/ts/main.ts",
     output: {
       path: path.resolve(__dirname, "../dist"),
       publicPath: "/dist",
@@ -16,6 +16,14 @@ module.exports = env => {
           test: /\.vue$/,
           loader: "vue-loader",
           options: {}
+        },
+        {
+          test: /\.tsx?$/,
+          loader: "ts-loader",
+          exclude: /node_modules/,
+          options: {
+            appendTsSuffixTo: [/\.vue$/]
+          }
         }
       ]
     },
@@ -26,6 +34,7 @@ module.exports = env => {
     performance: {
       hints: false
     },
-    devtool: "#eval-source-map"
+    devtool: "#eval-source-map",
+    plugins: [new VueLoaderPlugin()]
   };
 };
