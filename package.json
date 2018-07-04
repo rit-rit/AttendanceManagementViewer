@@ -6,10 +6,13 @@
   "scripts": {
     "precommit": "lint-staged",
     "build": "webpack --config build/webpack.config.js --progress --colors --mode=development",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint-staged":{
-      "*.ts": ["tslint --fix", "gid add"]
-    }
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint --fix",
+      "gid add"
+    ]
   },
   "repository": {
     "type": "git",
