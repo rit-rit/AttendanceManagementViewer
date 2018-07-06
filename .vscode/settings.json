@@ -1,3 +1,28 @@
 {
-  "git.ignoreLimitWarning": true
+  "workbench.colorTheme": "Monokai",
+  // 1 つのタブに相当するスペースの数。`editor.detectIndentation` がオンの場合、この設定はファイル コンテンツに基づいて上書きされます。
+  "editor.tabSize": 2,
+  // ファイルを保存するときにフォーマットしてください。フォーマッタを使用可能にして、ファイルを自動保存せず、エディターをシャットダウンしないでください。
+  "editor.formatOnSave": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "prettier.eslintIntegration": true,
+  "tslint.enable": true,
+  "tslint.configFile": "node_modules\\gts\\tslint.json",
+  "tslint.autoFixOnSave": true,
+  "tslint.alwaysShowStatus": true,
+  "tslint.alwaysShowRuleFailuresAsWarnings": true,
+  "typescript.check.npmIsInstalled": true,
+  "typescript.format.enable": true,
+  "files.eol": "\n",
+  "explorer.confirmDelete": false,
+  "html.format.enable": true,
+  "npm.autoDetect": "on",
+  "npm.useRootDirectory": true,
+  "git.detectSubmodules": true,
+  "git.autofetch": false,
+  "explorer.confirmDragAndDrop": false,
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatter.ts": "prettier"
 }
