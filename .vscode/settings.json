@@ -5,7 +5,6 @@
   // ファイルを保存するときにフォーマットしてください。フォーマッタを使用可能にして、ファイルを自動保存せず、エディターをシャットダウンしないでください。
   "editor.formatOnSave": true,
   "workbench.startupEditor": "newUntitledFile",
-  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
   "prettier.eslintIntegration": true,
   "tslint.enable": true,
   "tslint.configFile": "node_modules\\gts\\tslint.json",
