@@ -1,12 +1,20 @@
 <template>
-  <span>{{message}}</span>
+  <div>
+    <Menu></Menu>
+    <br>
+    <span>{{message}}</span>
+
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Components from "vue-class-component";
-@Components
+import Menu from "src/components/Menu.vue";
+@Components({
+  components:{Menu}
+})
 export default class App extends Vue {
-  message: string = "Hello World!!";
+  message: string = "Here is App.vue!!";
 }
 </script>
