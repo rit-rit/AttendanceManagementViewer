@@ -1,5 +1,8 @@
 {
   "extends": "./node_modules\\gts\\tsconfig-google.json",
+  "items": {
+    "enum": ["single"]
+  },
   "compilerOptions": {
     "target": "es2015",
     "rootDir": ".",
@@ -16,6 +19,12 @@
     "experimentalDecorators": true,
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src/*.ts", "src/**/*.ts", "test/*.ts", "test/**/*.ts"],
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts",
+    "test/*.ts",
+    "test/**/*.ts",
+    "src/**/*.vue"
+  ],
   "exclude": ["node_modules"]
 }
