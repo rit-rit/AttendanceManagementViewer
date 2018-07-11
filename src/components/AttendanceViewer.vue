@@ -9,17 +9,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component";
-import AttendanceViewerItem from "src/components/AttendanceViewerItem.vue"
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import AttendanceViewerItem from 'src/components/AttendanceViewerItem.vue';
 
 @Component({
-  components:{AttendanceViewerItem}
-  }
-)
-export default class AttendanceViewer extends Vue{
-
-}
+  components: { AttendanceViewerItem }
+})
+export default class AttendanceViewer extends Vue {}
 </script>
 
 
