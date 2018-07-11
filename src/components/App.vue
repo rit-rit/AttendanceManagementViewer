@@ -10,14 +10,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Components from "vue-class-component";
-import Menu from "src/components/Menu.vue";
-import AttendanceViewer from "src/components/AttendanceViewer.vue";
+import Vue from 'vue';
+import Components from 'vue-class-component';
+import Menu from 'src/components/Menu.vue';
+import AttendanceViewer from 'src/components/AttendanceViewer.vue';
 @Components({
-    components:{Menu,AttendanceViewer}
+  components: { Menu, AttendanceViewer }
 })
 export default class App extends Vue {
-     message: string = "Here is App.vue!!"; 
+  message: string = 'Here is App.vue!!';
 }
 </script>
