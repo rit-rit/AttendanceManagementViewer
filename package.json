@@ -6,6 +6,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "build": "webpack --config build/webpack.config.js --progress --colors --mode=development",
+    "watch": "webpack -d --watch --config build/webpack.config.js --progress --colors --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
