@@ -1,8 +1,8 @@
-const path = require('path')
-const webpack = require('webpack')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const path = require('path');
+const webpack = require('webpack');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-module.exports = (env) => {
+module.exports = env => {
   return {
     entry: './src/ts/main.ts',
     output: {
@@ -24,6 +24,10 @@ module.exports = (env) => {
           options: {
             appendTsSuffixTo: [/\.vue$/]
           }
+        },
+        {
+          test: /\.css$/,
+          use: ['vue-style-loader', 'css-loader']
         }
       ]
     },
@@ -46,5 +50,5 @@ module.exports = (env) => {
     },
     devtool: '#eval-source-map',
     plugins: [new VueLoaderPlugin()]
-  }
-}
+  };
+};
