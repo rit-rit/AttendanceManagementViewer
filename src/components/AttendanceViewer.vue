@@ -1,22 +1,80 @@
 <template>
-  <div>
-    <span>Here is AttendanceViewer</span>
-    <br>
-    <AttendanceViewerItem></AttendanceViewerItem>
-    <br>
-    <AttendanceViewerItem></AttendanceViewerItem>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th class="date">Date</th>
+        <th>Attendance Division</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Rest Time</th>
+        <th>Work Time</th>
+        <th>Overtime (Weekday)</th>
+        <th>Late-night overtime (Weekday)</th>
+        <th id="AAA" @click="switchDisplay">Overtime (Holiday)</th>
+        <th v-if="overtimeHolidayShowFlag">Late-night overtime (Holiday)</th>
+        <th>Holiday work</th>
+        <th>Holiday work (overtime)</th>
+        <th>Compensatory day off</th>
+        <th>Substitution holiday work </th>
+        <th>Substitution holiday work (overtime)</th>
+        <th>e-work</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <AttendanceViewerItem v-for="(dateItem,index) in dateArray" :key="index" v-bind:date="dateItem" v-bind:isShown="overtimeHolidayShowFlag"></AttendanceViewerItem>
+      <!--<AttendanceViewerItem v-bind:isShown="overtimeHolidayShowFlag"></AttendanceViewerItem>-->
+    </tbody>
+  </table>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import AttendanceViewerItem from 'src/components/AttendanceViewerItem.vue';
-
 @Component({
   components: { AttendanceViewerItem }
 })
-export default class AttendanceViewer extends Vue {}
+export default class AttendanceViewer extends Vue {
+  dateArray: string[] = [];
+  overtimeHolidayShowFlag: boolean = true;
+
+  mounted(): void {
+    const currentDate: Date = new Date();
+    const lastDay: number = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
+    ).getDate();
+    for (var curDay: number = 2; curDay <= lastDay + 1; curDay++) {
+      this.dateArray.push(
+        new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          curDay
+        ).toDateString()
+      );
+    }
+  }
+  switchDisplay(event: Event): void {
+    this.overtimeHolidayShowFlag = !this.overtimeHolidayShowFlag;
+  }
+}
 </script>
 
-
+<style scoped>
+table {
+  border-collapse: collapse;
+  border: 2px black solid;
+}
+th {
+  border: 1px red solid;
+}
+thead {
+  border-bottom: 3px double green;
+  color: red;
+}
+th.date {
+  width: 120px;
+}
+</style>
