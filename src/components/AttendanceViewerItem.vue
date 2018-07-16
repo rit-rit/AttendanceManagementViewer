@@ -2,10 +2,10 @@
   <tr>
     <th>{{dateProp.toDateString()}}</th>
     <th>Attendance Division</th>
-    <th><input type="text"></th>
-    <th>End Time</th>
-    <th>Rest Time</th>
-    <th>Work Time</th>
+    <th><input v-model="startTime" type="text"></th>
+    <th><input v-model="endTime" type="text"></th>
+    <th><input v-model="restTime" type="text"></th>
+    <th>{{workTime}}</th>
     <th>Overtime (Weekday)</th>
     <th>Late-night overtime (Weekday)</th>
     <th v-if="!isShown">...</th>
@@ -29,6 +29,37 @@ import { Prop, Provide } from 'vue-property-decorator';
 export default class AttendanceViewerItem extends Vue {
   @Prop() isShown: boolean = true;
   @Prop(Date) dateProp!: Date;
+  startTime: string = '';
+  endTime: string = '';
+  restTime: string = '';
+
+  get workTime(): string {
+    if (this.endTime == '') {
+      return '';
+    } else {
+      var workTime: Date = new Date(
+        new Date(
+          0,
+          0,
+          0,
+          parseInt(this.endTime.split(':')[0]),
+          parseInt(this.endTime.split(':')[1])
+        ).getTime() -
+          new Date(
+            0,
+            0,
+            0,
+            parseInt(this.startTime.split(':')[0]),
+            parseInt(this.startTime.split(':')[1])
+          ).getTime()
+      );
+      return (
+        ('0' + workTime.getUTCHours().toString()).slice(-2) +
+        ':' +
+        ('0' + workTime.getUTCMinutes().toString()).slice(-2)
+      );
+    }
+  }
 }
 </script>
 <style scoped>
