@@ -11,7 +11,7 @@
         <th>Overtime (Weekday)</th>
         <th>Late-night overtime (Weekday)</th>
         <th v-if="!overtimeHolidayShowFlag" @click="switchDisplay">Overtime (Holiday)(+)</th>
-        <th id="AAA" v-if="overtimeHolidayShowFlag" @click="switchDisplay">Overtime (Holiday)(-)</th>
+        <th v-if="overtimeHolidayShowFlag" @click="switchDisplay">Overtime (Holiday)(-)</th>
         <th v-if="overtimeHolidayShowFlag">Late-night overtime (Holiday)</th>
         <th>Holiday work</th>
         <th>Holiday work (overtime)</th>

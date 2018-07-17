@@ -37,21 +37,36 @@ export default class AttendanceViewerItem extends Vue {
     if (this.endTime == '') {
       return '';
     } else {
-      var workTime: Date = new Date(
+      var workTime: Date = this.diffTime(
         new Date(
-          0,
-          0,
-          0,
-          parseInt(this.endTime.split(':')[0]),
-          parseInt(this.endTime.split(':')[1])
-        ).getTime() -
+          Date.UTC(
+            0,
+            0,
+            0,
+            parseInt(this.restTime.split(':')[0]),
+            parseInt(this.restTime.split(':')[1])
+          )
+        ),
+        this.diffTime(
           new Date(
-            0,
-            0,
-            0,
-            parseInt(this.startTime.split(':')[0]),
-            parseInt(this.startTime.split(':')[1])
-          ).getTime()
+            Date.UTC(
+              0,
+              0,
+              0,
+              parseInt(this.startTime.split(':')[0]),
+              parseInt(this.startTime.split(':')[1])
+            )
+          ),
+          new Date(
+            Date.UTC(
+              0,
+              0,
+              0,
+              parseInt(this.endTime.split(':')[0]),
+              parseInt(this.endTime.split(':')[1])
+            )
+          )
+        )
       );
       return (
         ('0' + workTime.getUTCHours().toString()).slice(-2) +
@@ -59,6 +74,27 @@ export default class AttendanceViewerItem extends Vue {
         ('0' + workTime.getUTCMinutes().toString()).slice(-2)
       );
     }
+  }
+
+  diffTime(startDate: Date, endDate: Date): Date {
+    console.log('first:' + startDate.getUTCHours() + startDate.getUTCMinutes());
+    console.log('second:' + endDate.getUTCHours() + endDate.getUTCMinutes());
+    return new Date(
+      new Date(
+        0,
+        0,
+        0,
+        endDate.getUTCHours(),
+        endDate.getUTCMinutes()
+      ).getTime() -
+        new Date(
+          0,
+          0,
+          0,
+          startDate.getUTCHours(),
+          startDate.getUTCMinutes()
+        ).getTime()
+    );
   }
 }
 </script>
