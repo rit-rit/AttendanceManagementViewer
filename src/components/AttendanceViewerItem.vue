@@ -37,63 +37,55 @@ export default class AttendanceViewerItem extends Vue {
     if (this.endTime == '') {
       return '';
     } else {
-      var workTime: Date = this.diffTime(
+      return this.calculateTimeDiff(
+        this.restTime,
+        this.calculateTimeDiff(this.startTime, this.endTime)
+      );
+    }
+  }
+
+  /**
+   * Calculate difference of time between startTime and endTime
+   * @param startTime HH:mm
+   * @param endTime HH:mm
+   * @returns difference of time HH:mm
+   */
+  calculateTimeDiff(startTime: string, endTime: string): string {
+    console.log(startTime);
+    console.log(endTime);
+    var calcDate = new Date(
+      new Date(
+        Date.UTC(
+          0,
+          0,
+          0,
+          parseInt(endTime.split(':')[0]),
+          parseInt(endTime.split(':')[1])
+        )
+      ).getTime() -
         new Date(
           Date.UTC(
             0,
             0,
             0,
-            parseInt(this.restTime.split(':')[0]),
-            parseInt(this.restTime.split(':')[1])
+            parseInt(startTime.split(':')[0]),
+            parseInt(startTime.split(':')[1])
           )
-        ),
-        this.diffTime(
-          new Date(
-            Date.UTC(
-              0,
-              0,
-              0,
-              parseInt(this.startTime.split(':')[0]),
-              parseInt(this.startTime.split(':')[1])
-            )
-          ),
-          new Date(
-            Date.UTC(
-              0,
-              0,
-              0,
-              parseInt(this.endTime.split(':')[0]),
-              parseInt(this.endTime.split(':')[1])
-            )
-          )
-        )
-      );
-      return (
-        ('0' + workTime.getUTCHours().toString()).slice(-2) +
-        ':' +
-        ('0' + workTime.getUTCMinutes().toString()).slice(-2)
-      );
-    }
+        ).getTime()
+    );
+    return this.formatTime(calcDate);
   }
 
-  diffTime(startDate: Date, endDate: Date): Date {
-    console.log('first:' + startDate.getUTCHours() + startDate.getUTCMinutes());
-    console.log('second:' + endDate.getUTCHours() + endDate.getUTCMinutes());
-    return new Date(
-      new Date(
-        0,
-        0,
-        0,
-        endDate.getUTCHours(),
-        endDate.getUTCMinutes()
-      ).getTime() -
-        new Date(
-          0,
-          0,
-          0,
-          startDate.getUTCHours(),
-          startDate.getUTCMinutes()
-        ).getTime()
+  /**
+   * Get formated UTC time from Date.
+   * @param date
+   * @return formated UTC time (HH:mm)
+   */
+  formatTime(date: Date): string {
+    return (
+      ('0' + date.getUTCHours()).slice(-2) +
+      ':' +
+      ('0' + date.getUTCMinutes()).slice(-2)
     );
   }
 }
