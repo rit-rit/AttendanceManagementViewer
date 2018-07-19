@@ -6,8 +6,8 @@
     <th><input v-model="endTime" type="text"></th>
     <th><input v-model="restTime" type="text"></th>
     <th>{{workTime}}</th>
-    <th>Overtime (Weekday)</th>
-    <th>Late-night overtime (Weekday)</th>
+    <th>{{overTimeOnWorkday}}</th>
+    <th>{{lateNightOverTimeOnWorkday}} </th>
     <th v-if="!isShown">...</th>
     <th v-if="isShown">Overtime (Holiday)</th>
     <th v-if="isShown">Late-night overtime (Holiday)</th>
@@ -44,6 +44,15 @@ export default class AttendanceViewerItem extends Vue {
     }
   }
 
+  get lateNightOverTimeOnWorkday(): string {
+    var endTimeHours = parseInt(this.endTime.split(':')[0]);
+    var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
+    if (endTimeHours >= 22) {
+      return this.formatTime(endTimeHours - 22, endTimeMinutes);
+    }
+    return '';
+  }
+
   /**
    * Calculate difference of time between startTime and endTime
    * @param startTime HH:mm
@@ -51,8 +60,6 @@ export default class AttendanceViewerItem extends Vue {
    * @returns difference of time HH:mm
    */
   calculateTimeDiff(startTime: string, endTime: string): string {
-    console.log(startTime);
-    console.log(endTime);
     var calcDate = new Date(
       new Date(
         Date.UTC(
@@ -73,7 +80,7 @@ export default class AttendanceViewerItem extends Vue {
           )
         ).getTime()
     );
-    return this.formatTime(calcDate);
+    return this.formatTimeFromDate(calcDate);
   }
 
   /**
@@ -81,12 +88,21 @@ export default class AttendanceViewerItem extends Vue {
    * @param date
    * @return formated UTC time (HH:mm)
    */
-  formatTime(date: Date): string {
+  formatTimeFromDate(date: Date): string {
     return (
       ('0' + date.getUTCHours()).slice(-2) +
       ':' +
       ('0' + date.getUTCMinutes()).slice(-2)
     );
+  }
+  /**
+   * Get formated UTC time from hours and minutes.
+   * @param hours
+   * @param minutes
+   * @return formated time (HH:mm)
+   */
+  formatTime(hours: number, minutes: number): string {
+    return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
   }
 }
 </script>
