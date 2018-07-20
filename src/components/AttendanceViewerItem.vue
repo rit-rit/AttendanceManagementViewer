@@ -1,7 +1,12 @@
 <template>
   <tr>
     <th>{{dateProp.toDateString()}}</th>
-    <th>Attendance Division</th>
+    <th>
+      <select v-model="attendanceDivision">
+        <option value="work">Work</option>
+        <option value="holiday">Holiday</option>
+      </select>
+    </th>
     <th><input v-model="startTime" type="text"></th>
     <th><input v-model="endTime" type="text"></th>
     <th><input v-model="restTime" type="text"></th>
@@ -32,7 +37,13 @@ export default class AttendanceViewerItem extends Vue {
   startTime: string = '';
   endTime: string = '';
   restTime: string = '';
+  attendanceDivision: string = 'work';
 
+  mounted() {
+    if (this.isWeekend(this.dateProp)) {
+      this.attendanceDivision = 'holiday';
+    }
+  }
   get workTime(): string {
     if (this.endTime == '') {
       return '';
@@ -103,6 +114,19 @@ export default class AttendanceViewerItem extends Vue {
    */
   formatTime(hours: number, minutes: number): string {
     return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
+  }
+
+  /**
+   * Judge whether the input date is weekend or not.
+   * @param date
+   * @return true: if weekend, false: other
+   */
+  isWeekend(date: Date): boolean {
+    if (date.getDay() == 0 || date.getDay() == 6) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 </script>
