@@ -13,9 +13,9 @@
     <th>{{workTime}}</th>
     <th>{{overTimeOnWorkday}}</th>
     <th>{{lateNightOverTimeOnWorkday}} </th>
-    <th v-if="!isShown">...</th>
-    <th v-if="isShown">Overtime (Holiday)</th>
-    <th v-if="isShown">Late-night overtime (Holiday)</th>
+    <th v-if="!isShownOvertimeHolidayProp">...</th>
+    <th v-if="isShownOvertimeHolidayProp">Overtime (Holiday)</th>
+    <th v-if="isShownOvertimeHolidayProp">Late-night overtime (Holiday)</th>
     <th>Holiday work</th>
     <th>Holiday work (overtime)</th>
     <th>Compensatory day off</th>
@@ -32,7 +32,7 @@ import Component from 'vue-class-component';
 import { Prop, Provide } from 'vue-property-decorator';
 @Component
 export default class AttendanceViewerItem extends Vue {
-  @Prop() isShown: boolean = true;
+  @Prop() isShownOvertimeHolidayProp: boolean = true;
   @Prop(Date) dateProp!: Date;
   startTime: string = '';
   endTime: string = '';

@@ -10,9 +10,9 @@
         <th>Work Time</th>
         <th>Overtime (Weekday)</th>
         <th>Late-night overtime (Weekday)</th>
-        <th v-if="!overtimeHolidayShowFlag" @click="switchDisplay">Overtime (Holiday)(+)</th>
-        <th v-if="overtimeHolidayShowFlag" @click="switchDisplay">Overtime (Holiday)(-)</th>
-        <th v-if="overtimeHolidayShowFlag">Late-night overtime (Holiday)</th>
+        <th v-if="!isShownOvertimeHoliday" @click="switchShownOvertimeHoliday">Overtime (Holiday)(+)</th>
+        <th v-if="isShownOvertimeHoliday" @click="switchShownOvertimeHoliday">Overtime (Holiday)(-)</th>
+        <th v-if="isShownOvertimeHoliday">Late-night overtime (Holiday)</th>
         <th>Holiday work</th>
         <th>Holiday work (overtime)</th>
         <th>Compensatory day off</th>
@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <AttendanceViewerItem v-for="(dateItem,index) in dateArray" :key="index" v-bind:dateProp="dateItem" v-bind:isShown="overtimeHolidayShowFlag"></AttendanceViewerItem>
+      <AttendanceViewerItem v-for="(dateItem,index) in dateArray" :key="index" v-bind:dateProp="dateItem" v-bind:isShownOvertimeHolidayProp="isShownOvertimeHoliday"></AttendanceViewerItem>
     </tbody>
   </table>
 </template>
@@ -37,7 +37,7 @@ import AttendanceViewerItem from 'src/components/AttendanceViewerItem.vue';
 })
 export default class AttendanceViewer extends Vue {
   dateArray: Date[] = [];
-  overtimeHolidayShowFlag: boolean = true;
+  isShownOvertimeHoliday: boolean = true;
 
   mounted(): void {
     const currentDate: Date = new Date();
@@ -52,8 +52,8 @@ export default class AttendanceViewer extends Vue {
       );
     }
   }
-  switchDisplay(event: Event): void {
-    this.overtimeHolidayShowFlag = !this.overtimeHolidayShowFlag;
+  switchShownOvertimeHoliday(event: Event): void {
+    this.isShownOvertimeHoliday = !this.isShownOvertimeHoliday;
   }
 }
 </script>
