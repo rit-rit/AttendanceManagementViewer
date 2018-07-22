@@ -45,7 +45,7 @@ export default class AttendanceViewerItem extends Vue {
     }
   }
   get workTime(): string {
-    if (this.endTime == '') {
+    if (this.endTime === '') {
       return '';
     } else {
       return this.calculateTimeDiff(
@@ -55,11 +55,17 @@ export default class AttendanceViewerItem extends Vue {
     }
   }
 
+  /**
+   * Calculate late-night overtime (weekday)
+   * @returns if weekday, late-night overtime (weekday) else ''
+   */
   get lateNightOverTimeOnWorkday(): string {
-    var endTimeHours = parseInt(this.endTime.split(':')[0]);
-    var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
-    if (endTimeHours >= 22) {
-      return this.formatTime(endTimeHours - 22, endTimeMinutes);
+    if (this.attendanceDivision === 'work') {
+      var endTimeHours = parseInt(this.endTime.split(':')[0]);
+      var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
+      if (endTimeHours >= 22) {
+        return this.formatTime(endTimeHours - 22, endTimeMinutes);
+      }
     }
     return '';
   }
