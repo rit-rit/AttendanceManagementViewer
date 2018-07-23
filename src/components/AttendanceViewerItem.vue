@@ -14,8 +14,8 @@
     <th>{{overTimeOnWorkday}}</th>
     <th>{{lateNightOverTimeOnWorkday}} </th>
     <th v-if="!isShownOvertimeHolidayProp">...</th>
-    <th v-if="isShownOvertimeHolidayProp">Overtime (Holiday)</th>
-    <th v-if="isShownOvertimeHolidayProp">Late-night overtime (Holiday)</th>
+    <th v-if="isShownOvertimeHolidayProp">{{overtimeOnHoliday}}</th>
+    <th v-if="isShownOvertimeHolidayProp">{{lateNightOvertimeOnHoliday}}</th>
     <th>Holiday work</th>
     <th>Holiday work (overtime)</th>
     <th>Compensatory day off</th>
@@ -44,6 +44,7 @@ export default class AttendanceViewerItem extends Vue {
       this.attendanceDivision = 'holiday';
     }
   }
+
   get workTime(): string {
     if (this.endTime === '') {
       return '';
@@ -53,6 +54,39 @@ export default class AttendanceViewerItem extends Vue {
         this.calculateTimeDiff(this.startTime, this.endTime)
       );
     }
+  }
+
+  /**
+   * Calculate overtime (holiday)
+   * @returns TODO
+   */
+  get overtimeOnHoliday(): string {
+    if (this.attendanceDivision === 'holiday') {
+      var workTimeHours = parseInt(this.workTime.split(':')[0]);
+      var workTimeMinutes = parseInt(this.workTime.split(':')[1]);
+      if (workTimeHours === 8 && workTimeMinutes === 0) {
+        return '';
+      }
+      if (workTimeHours >= 8) {
+        return this.formatTime(workTimeHours - 8, workTimeMinutes);
+      }
+    }
+    return '';
+  }
+
+  /**
+   * Calculate late-night overtime (holiday)
+   * @returns if holiday, late-night overtime (holiday) else ''
+   */
+  get lateNightOvertimeOnHoliday(): string {
+    if (this.attendanceDivision === 'holiday') {
+      var endTimeHours = parseInt(this.endTime.split(':')[0]);
+      var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
+      if (endTimeHours >= 22) {
+        return this.formatTime(endTimeHours - 22, endTimeMinutes);
+      }
+    }
+    return '';
   }
 
   /**
