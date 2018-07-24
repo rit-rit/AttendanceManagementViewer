@@ -5,6 +5,7 @@
       <select v-model="attendanceDivision">
         <option value="work">Work</option>
         <option value="holiday">Holiday</option>
+        <option value="substitution">Substitution holiday work</option>
       </select>
     </th>
     <th><input v-model="startTime" type="text"></th>
