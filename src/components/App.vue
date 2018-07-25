@@ -2,7 +2,7 @@
   <div>
     <Menu></Menu>
     <br>
-    <span>{{message}}</span>
+    <span>Here is App.vue!!</span>
     <br>
     <AttendanceViewer></AttendanceViewer>
 
@@ -17,7 +17,5 @@ import AttendanceViewer from 'src/components/AttendanceViewer.vue';
 @Components({
   components: { Menu, AttendanceViewer }
 })
-export default class App extends Vue {
-  message: string = 'Here is App.vue!!';
-}
+export default class App extends Vue {}
 </script>
