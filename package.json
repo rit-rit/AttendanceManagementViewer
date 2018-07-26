@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/rit-rit/AttendanceManagementViewer#readme",
   "devDependencies": {
+    "axios": "^0.18.0",
     "css-loader": "^1.0.0",
     "eslint": "^5.0.1",
     "eslint-config-google": "^0.9.1",
