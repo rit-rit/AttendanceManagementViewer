@@ -62,7 +62,10 @@ export default class AttendanceViewer extends Vue {
 
   postDate(): void {
     axios
-      .post('http://localhost:8081/dummy', { id: 'AAAA' })
+      .post('http://localhost:3000/dummy', {
+        id: new Date().toString(),
+        content: 'AAAA'
+      })
       .then(function(response) {
         console.log(response);
       })
