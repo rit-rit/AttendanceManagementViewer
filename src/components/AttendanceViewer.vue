@@ -27,7 +27,7 @@
         <AttendanceViewerItem v-for="(dateItem,index) in dateArray" :key="index" v-bind:dateProp="dateItem" v-bind:isShownOvertimeHolidayProp="isShownOvertimeHoliday"></AttendanceViewerItem>
       </tbody>
     </table>
-    <button @click="postDate">Post</button>
+    <button @click="postAttendanceData">Submit</button>
   </div>
 </template>
 
@@ -60,7 +60,7 @@ export default class AttendanceViewer extends Vue {
     this.isShownOvertimeHoliday = !this.isShownOvertimeHoliday;
   }
 
-  postDate(): void {
+  postAttendanceData(): void {
     axios
       .post('http://localhost:3000/dummy', {
         id: new Date().toString(),
