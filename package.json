@@ -13,7 +13,7 @@
   "lint-staged": {
     "*.ts": [
       "tslint --fix",
-      "gid add"
+      "git add"
     ]
   },
   "repository": {
