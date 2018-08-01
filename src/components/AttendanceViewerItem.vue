@@ -12,7 +12,7 @@
     <th><input v-model="endTime" type="text"></th>
     <th><input v-model="restTime" type="text"></th>
     <th>{{workTime}}</th>
-    <th>{{overTimeOnWorkday}}</th>
+    <!--<th>{{overTimeOnWorkday}}</th>
     <th>{{lateNightOverTimeOnWorkday}} </th>
     <th v-if="!isShownOvertimeHolidayProp">...</th>
     <th v-if="isShownOvertimeHolidayProp">{{overtimeOnHoliday}}</th>
@@ -23,7 +23,7 @@
     <th>Substitution holiday work </th>
     <th>Substitution holiday work (overtime)</th>
     <th>e-work</th>
-    <th>Note</th>
+    <th>Note</th>-->
   </tr>
 </template>
 

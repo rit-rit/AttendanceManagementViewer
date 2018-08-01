@@ -9,7 +9,7 @@
           <th>End Time</th>
           <th>Rest Time</th>
           <th>Work Time</th>
-          <th>Overtime (Weekday)</th>
+          <!--<th>Overtime (Weekday)</th>
           <th>Late-night overtime (Weekday)</th>
           <th v-if="!isShownOvertimeHoliday" @click="switchShownOvertimeHoliday">Overtime (Holiday)(+)</th>
           <th v-if="isShownOvertimeHoliday" @click="switchShownOvertimeHoliday">Overtime (Holiday)(-)</th>
@@ -20,7 +20,7 @@
           <th>Substitution holiday work </th>
           <th>Substitution holiday work (overtime)</th>
           <th>e-work</th>
-          <th>Note</th>
+          <th>Note</th>-->
         </tr>
       </thead>
       <tbody>
@@ -50,7 +50,7 @@ export default class AttendanceViewer extends Vue {
       currentDate.getMonth() + 1,
       0
     ).getDate();
-    for (var curDay: number = 1; curDay <= lastDay + 1; curDay++) {
+    for (var curDay: number = 1; curDay <= lastDay; curDay++) {
       this.dateArray.push(
         new Date(currentDate.getFullYear(), currentDate.getMonth(), curDay)
       );
