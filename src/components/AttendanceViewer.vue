@@ -34,7 +34,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import AttendanceViewerItem from 'src/components/AttendanceViewerItem.vue';
+import AttendanceViewerItem from '@/components/AttendanceViewerItem.vue';
 import axios from 'axios';
 @Component({
   components: { AttendanceViewerItem }

@@ -9,6 +9,9 @@
     "outDir": "build",
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es5", "es2015.promise"],
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "module": "es2015",
     "moduleResolution": "node",
     "baseUrl": "./",
@@ -24,6 +27,8 @@
     "src/**/*.ts",
     "test/*.ts",
     "test/**/*.ts",
+    "test/**/*.spec.ts",
+    "test/**/*.vue",
     "src/**/*.vue"
   ],
   "exclude": ["node_modules"]
