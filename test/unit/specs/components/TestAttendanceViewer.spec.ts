@@ -1,8 +1,8 @@
 import AttendanceViewer from '@/components/AttendanceViewer.vue';
-import { mount, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 
-const wrapper = mount(AttendanceViewer);
+const wrapper = shallowMount(AttendanceViewer);
 
-test('Sample test', () => {
+test('mounted function test', () => {
   expect(wrapper.emitted('mounted')).toBeUndefined();
 });
