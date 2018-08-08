@@ -6,7 +6,7 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest'
   },
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^src/(.*)$': '<rootDir>/src/$1'
   },
   collectCoverageFrom: ['<rootDri>/src/components/**/*.vue'],
   coverageDirectory: '<rootDir>/test/unit/coverage',

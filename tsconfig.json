@@ -14,7 +14,7 @@
     },
     "module": "es2015",
     "moduleResolution": "node",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "sourceMap": true,
     "strict": true,
     "noImplicitReturns": true,
@@ -25,11 +25,9 @@
   "include": [
     "src/*.ts",
     "src/**/*.ts",
+    "src/**/*.vue",
     "test/*.ts",
-    "test/**/*.ts",
-    "test/**/*.spec.ts",
-    "test/**/*.vue",
-    "src/**/*.vue"
+    "test/**/*.spec.ts"
   ],
   "exclude": ["node_modules"]
 }
