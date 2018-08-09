@@ -3,5 +3,11 @@ import { shallowMount } from '@vue/test-utils';
 
 test('mounted function test', () => {
   const wrapper = shallowMount(AttendanceViewer);
-  expect(wrapper.emitted('mounted')).toBeUndefined();
+
+  // First item of dateArray is the first date of current month.
+  expect(wrapper.vm.dateArray[0].getDate()).toEqual(2);
+  // Last item of dateArray is the Last date of current month.
+  expect(
+    wrapper.vm.dateArray[wrapper.vm.dateArray.length - 1].getDate()
+  ).toEqual(1);
 });
