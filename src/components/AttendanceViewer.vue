@@ -50,7 +50,7 @@ export default class AttendanceViewer extends Vue {
       currentDate.getMonth() + 1,
       0
     ).getDate();
-    for (var curDay: number = 2; curDay <= lastDay + 1; curDay++) {
+    for (var curDay: number = 1; curDay <= lastDay; curDay++) {
       this.dateArray.push(
         new Date(currentDate.getFullYear(), currentDate.getMonth(), curDay)
       );
