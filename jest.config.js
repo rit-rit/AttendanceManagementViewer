@@ -8,9 +8,11 @@ module.exports = {
   moduleNameMapper: {
     '^src/(.*)$': '<rootDir>/src/$1'
   },
-  collectCoverageFrom: ['<rootDri>/src/components/**/*.vue'],
+  collectCoverage: true,
+  collectCoverageFrom: ['<rootDir>/src/components/**/*.vue'],
+  coveragePathIgnorePatterns: ['<rootDir>/src/components/App.vue'],
   coverageDirectory: '<rootDir>/test/unit/coverage',
-  coverageReporters: ['html', 'test-summary'],
+  coverageReporters: ['html', 'text-summary'],
   verbose: true,
   testURL: 'http://localhost/'
 };
