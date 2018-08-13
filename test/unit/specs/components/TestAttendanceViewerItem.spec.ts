@@ -67,3 +67,16 @@ test('overtimeOnHoliday function test.  The case is that the date is holiday.', 
   wrapper.setData({ restTime: '1:00' });
   expect(wrapper.vm.overtimeOnHoliday).toBe('01:00');
 });
+
+test('lateNightOverTimeOnWeekday', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const date: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+  // lateNightOverTime = 1:00
+  wrapper.setData({ startTime: '9:00' });
+  wrapper.setData({ endTime: '23:00' });
+  wrapper.setData({ restTime: '1:00' });
+  expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('01:00');
+});
