@@ -80,3 +80,16 @@ test('lateNightOverTimeOnWeekday', () => {
   wrapper.setData({ restTime: '1:00' });
   expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('01:00');
 });
+
+test('lateNightOverTimeOnWeekday', () => {
+  // 2000/1/2 00:00:00.00(Sun)
+  const date: Date = new Date(2000, 0, 2, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+  // lateNightOverTime = ""
+  wrapper.setData({ startTime: '9:00' });
+  wrapper.setData({ endTime: '23:00' });
+  wrapper.setData({ restTime: '1:00' });
+  expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('');
+});
