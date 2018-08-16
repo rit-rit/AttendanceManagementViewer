@@ -61,6 +61,20 @@ test('overtimeOnHoliday function test.  The case is that the date is holiday.', 
     propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
   });
 
+  // workTime = 7:00
+  wrapper.setData({ startTime: '9:00' });
+  wrapper.setData({ endTime: '17:00' });
+  wrapper.setData({ restTime: '1:00' });
+  expect(wrapper.vm.overtimeOnHoliday).toBe('');
+});
+
+test('overtimeOnHoliday function test.  The case is that the date is holiday.', () => {
+  // 2000/1/1 00:00:00.00(Sat)
+  const date: Date = new Date(2000, 0, 1, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+
   // workTime = 8:00
   wrapper.setData({ startTime: '9:00' });
   wrapper.setData({ endTime: '19:00' });
@@ -81,6 +95,19 @@ test('lateNightOverTimeOnWeekday function test. The case is that the date is wee
   expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('01:00');
 });
 
+test('lateNightOverTimeOnWeekday function test. The case is that the date is weekday.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const date: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+  // lateNightOverTime = ""
+  wrapper.setData({ startTime: '9:00' });
+  wrapper.setData({ endTime: '22:00' });
+  wrapper.setData({ restTime: '1:00' });
+  expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('');
+});
+
 test('lateNightOverTimeOnWeekday function test. The case is that the date is holiday.', () => {
   // 2000/1/2 00:00:00.00(Sun)
   const date: Date = new Date(2000, 0, 2, 0, 0, 0, 0);
@@ -94,6 +121,32 @@ test('lateNightOverTimeOnWeekday function test. The case is that the date is hol
   expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('');
 });
 
+test('lateNightOverTimeOnWeekday function test. The case is that the date is weekday.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const date: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+  // lateNightOverTime = ""
+  wrapper.setData({ startTime: '9:00' });
+  wrapper.setData({ endTime: '21:00' });
+  wrapper.setData({ restTime: '1:00' });
+  expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('');
+});
+
+test('lateNightOverTimeOnHoliday function test. The case is that the date is holiday.', () => {
+  // 2000/1/2 00:00:00.00(Sun)
+  const date: Date = new Date(2000, 0, 2, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+  // lateNightOverTime = 01:00
+  wrapper.setData({ startTime: '9:00' });
+  wrapper.setData({ endTime: '21:00' });
+  wrapper.setData({ restTime: '1:00' });
+  expect(wrapper.vm.lateNightOvertimeOnHoliday).toBe('');
+});
+
 test('lateNightOverTimeOnHoliday function test. The case is that the date is holiday.', () => {
   // 2000/1/2 00:00:00.00(Sun)
   const date: Date = new Date(2000, 0, 2, 0, 0, 0, 0);
@@ -101,6 +154,19 @@ test('lateNightOverTimeOnHoliday function test. The case is that the date is hol
     propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
   });
   // lateNightOverTime = ""
+  wrapper.setData({ startTime: '9:00' });
+  wrapper.setData({ endTime: '22:00' });
+  wrapper.setData({ restTime: '1:00' });
+  expect(wrapper.vm.lateNightOvertimeOnHoliday).toBe('');
+});
+
+test('lateNightOverTimeOnHoliday function test. The case is that the date is holiday.', () => {
+  // 2000/1/2 00:00:00.00(Sun)
+  const date: Date = new Date(2000, 0, 2, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+  // lateNightOverTime = 1:00
   wrapper.setData({ startTime: '9:00' });
   wrapper.setData({ endTime: '23:00' });
   wrapper.setData({ restTime: '1:00' });

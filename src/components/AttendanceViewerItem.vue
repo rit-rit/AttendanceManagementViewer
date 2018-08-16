@@ -67,9 +67,10 @@ export default class AttendanceViewerItem extends Vue {
       var workTimeMinutes = parseInt(this.workTime.split(':')[1]);
       if (workTimeHours === 8 && workTimeMinutes === 0) {
         return '';
-      }
-      if (workTimeHours >= 8) {
+      } else if (workTimeHours >= 8) {
         return this.formatTime(workTimeHours - 8, workTimeMinutes);
+      } else {
+        return '';
       }
     }
     return '';
@@ -83,8 +84,12 @@ export default class AttendanceViewerItem extends Vue {
     if (this.attendanceDivision === 'holiday') {
       var endTimeHours = parseInt(this.endTime.split(':')[0]);
       var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
-      if (endTimeHours >= 22) {
+      if (endTimeHours == 22 && endTimeMinutes == 0) {
+        return '';
+      } else if (endTimeHours >= 22) {
         return this.formatTime(endTimeHours - 22, endTimeMinutes);
+      } else {
+        return '';
       }
     }
     return '';
@@ -98,8 +103,12 @@ export default class AttendanceViewerItem extends Vue {
     if (this.attendanceDivision === 'work') {
       var endTimeHours = parseInt(this.endTime.split(':')[0]);
       var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
-      if (endTimeHours >= 22) {
+      if (endTimeHours == 22 && endTimeMinutes == 0) {
+        return '';
+      } else if (endTimeHours >= 22) {
         return this.formatTime(endTimeHours - 22, endTimeMinutes);
+      } else {
+        return '';
       }
     }
     return '';
