@@ -11,3 +11,8 @@ test('mounted function test', () => {
     wrapper.vm.dateArray[wrapper.vm.dateArray.length - 1].getDate()
   ).toEqual(wrapper.vm.dateArray.length);
 });
+
+test('switchShowOvertimeHoliday function test.', () => {
+  const wrapper = shallowMount(AttendanceViewer);
+  expect(wrapper.vm.isShownOvertimeHoliday).toBeTruthy();
+});
