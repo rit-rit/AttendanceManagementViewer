@@ -9,18 +9,6 @@
           <th>End Time</th>
           <th>Rest Time</th>
           <th>Work Time</th>
-          <!--<th>Overtime (Weekday)</th>
-          <th>Late-night overtime (Weekday)</th>
-          <th v-if="!isShownOvertimeHoliday" @click="switchShownOvertimeHoliday">Overtime (Holiday)(+)</th>
-          <th v-if="isShownOvertimeHoliday" @click="switchShownOvertimeHoliday">Overtime (Holiday)(-)</th>
-          <th v-if="isShownOvertimeHoliday">Late-night overtime (Holiday)</th>
-          <th>Holiday work</th>
-          <th>Holiday work (overtime)</th>
-          <th>Compensatory day off</th>
-          <th>Substitution holiday work </th>
-          <th>Substitution holiday work (overtime)</th>
-          <th>e-work</th>
-          <th>Note</th>-->
         </tr>
       </thead>
       <tbody>
@@ -55,9 +43,6 @@ export default class AttendanceViewer extends Vue {
         new Date(currentDate.getFullYear(), currentDate.getMonth(), curDay)
       );
     }
-  }
-  switchShownOvertimeHoliday(event: Event): void {
-    this.isShownOvertimeHoliday = !this.isShownOvertimeHoliday;
   }
 
   postAttendanceData(): void {
