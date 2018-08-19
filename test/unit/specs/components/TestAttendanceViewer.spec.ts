@@ -16,3 +16,8 @@ test('switchShowOvertimeHoliday function test.', () => {
   const wrapper = shallowMount(AttendanceViewer);
   expect(wrapper.vm.isShownOvertimeHoliday).toBeTruthy();
 });
+
+test("postAttendanceData function test.",()=>{
+  const wrapper = shallowMount(AttendanceViewer);
+  expect(wrapper.vm.postAttendanceData()).toBeFalsy();
+})
