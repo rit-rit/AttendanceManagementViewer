@@ -1,5 +1,5 @@
 import AttendanceViewerItem from 'src/components/AttendanceViewerItem.vue';
-import { mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 
 test('mounted function test(Holoday)', () => {
   // 2000/1/1 00:00:00.00(Sat)
@@ -184,4 +184,43 @@ test('lateNightOverTimeOnHoliday function test. The case is that the date is wee
   wrapper.setData({ endTime: '23:00' });
   wrapper.setData({ restTime: '1:00' });
   expect(wrapper.vm.lateNightOvertimeOnHoliday).toBe('');
+});
+
+test('checkTimeFormat function test. The case is that the time is correct format.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const date: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+
+  expect(wrapper.vm.checkTimeFormat('1:00')).toBeTruthy();
+});
+
+test('checkTimeFormat function test. The case is that the time is correct format.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const date: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+
+  expect(wrapper.vm.checkTimeFormat('10:30')).toBeTruthy();
+});
+
+test('checkTimeFormat function test. The case is that the time is incorrect format.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const date: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+
+  expect(wrapper.vm.checkTimeFormat('10:3')).toBeFalsy();
+});
+test('checkTimeFormat function test. The case is that the time is incorrect format.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const date: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+
+  expect(wrapper.vm.checkTimeFormat('a')).toBeFalsy();
 });

@@ -181,12 +181,11 @@ export default class AttendanceViewerItem extends Vue {
 
   /**
    * check time format
-   * @param time 
+   * @param time
    * @returns true: if format is ok, false: other
    */
-  checkTimeFormat(time:string):boolean{
-    
-    return false;
+  checkTimeFormat(time: string): boolean {
+    return new RegExp(/^[0-9]+:[0-9]{2}$/).test(time);
   }
 }
 </script>
