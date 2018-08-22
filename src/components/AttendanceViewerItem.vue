@@ -47,14 +47,17 @@ export default class AttendanceViewerItem extends Vue {
   }
 
   get workTime(): string {
-    if (this.endTime === '') {
+    if (
+      !this.checkTimeFormat(this.startTime) ||
+      !this.checkTimeFormat(this.endTime) ||
+      !this.checkTimeFormat(this.restTime)
+    ) {
       return '';
-    } else {
-      return this.calculateTimeDiff(
-        this.restTime,
-        this.calculateTimeDiff(this.startTime, this.endTime)
-      );
     }
+    return this.calculateTimeDiff(
+      this.restTime,
+      this.calculateTimeDiff(this.startTime, this.endTime)
+    );
   }
 
   /**
