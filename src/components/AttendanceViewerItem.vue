@@ -66,6 +66,13 @@ export default class AttendanceViewerItem extends Vue {
    */
   get overtimeOnHoliday(): string {
     if (this.attendanceDivision === 'holiday') {
+      if (
+        !this.checkTimeFormat(this.startTime) ||
+        !this.checkTimeFormat(this.endTime) ||
+        !this.checkTimeFormat(this.restTime)
+      ) {
+        return '';
+      }
       var workTimeHours = parseInt(this.workTime.split(':')[0]);
       var workTimeMinutes = parseInt(this.workTime.split(':')[1]);
       if (workTimeHours === 8 && workTimeMinutes === 0) {
