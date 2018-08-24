@@ -92,6 +92,9 @@ export default class AttendanceViewerItem extends Vue {
    */
   get lateNightOvertimeOnHoliday(): string {
     if (this.attendanceDivision === 'holiday') {
+      if (!this.checkTimeFormat(this.endTime)) {
+        return '';
+      }
       var endTimeHours = parseInt(this.endTime.split(':')[0]);
       var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
       if (endTimeHours == 22 && endTimeMinutes == 0) {
@@ -111,6 +114,9 @@ export default class AttendanceViewerItem extends Vue {
    */
   get lateNightOverTimeOnWorkday(): string {
     if (this.attendanceDivision === 'work') {
+      if (!this.checkTimeFormat(this.endTime)) {
+        return '';
+      }
       var endTimeHours = parseInt(this.endTime.split(':')[0]);
       var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
       if (endTimeHours == 22 && endTimeMinutes == 0) {
