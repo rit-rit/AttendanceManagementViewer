@@ -75,6 +75,17 @@ test('overtimeOnHoliday function test.  The case is that the date is holiday.', 
     propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
   });
 
+  // workTime = 7:00
+  wrapper.setData({ startTime: 'a' });
+  expect(wrapper.vm.overtimeOnHoliday).toBe('');
+});
+test('overtimeOnHoliday function test.  The case is that the date is holiday.', () => {
+  // 2000/1/1 00:00:00.00(Sat)
+  const date: Date = new Date(2000, 0, 1, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: { isShownOvertimeHolidayProp: true, dateProp: date }
+  });
+
   // workTime = 8:00
   wrapper.setData({ startTime: '9:00' });
   wrapper.setData({ endTime: '19:00' });
