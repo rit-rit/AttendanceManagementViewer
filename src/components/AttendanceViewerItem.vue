@@ -35,9 +35,9 @@ import { Prop, Provide } from 'vue-property-decorator';
 export default class AttendanceViewerItem extends Vue {
   @Prop() isShownOvertimeHolidayProp: boolean = true;
   @Prop(Date) dateProp!: Date;
-  @Prop(String) startTime!: String;
-  @Prop(String) endTime!: String;
-  @Prop(String) restTime!: String;
+  @Prop() startTime: string = '';
+  @Prop() endTime: string = '';
+  @Prop() restTime: string = '';
   @Prop() attendanceDivision: string = 'work';
 
   mounted() {
