@@ -8,7 +8,7 @@
         <option value="substitution">Substitution holiday work</option>
       </select>
     </th>
-    <th><input v-model="startTime" type="text"></th>
+    <th><input :value="startTimeProp" @input="updateStartTime" type="text"></th>
     <th><input v-model="endTime" type="text"></th>
     <th><input v-model="restTime" type="text"></th>
     <th>{{workTime}}</th>
@@ -35,11 +35,14 @@ import { Prop, Provide } from 'vue-property-decorator';
 export default class AttendanceViewerItem extends Vue {
   @Prop() isShownOvertimeHolidayProp: boolean = true;
   @Prop(Date) dateProp!: Date;
-  @Prop() startTime: string = '';
+  @Prop() startTimeProp!: string;
   @Prop() endTime: string = '';
   @Prop() restTime: string = '';
   @Prop() attendanceDivision: string = 'work';
 
+  updateStartTime(e: any) {
+    this.$emit('input', e.target.value.toString());
+  }
   mounted() {
     if (this.isWeekend(this.dateProp)) {
       this.attendanceDivision = 'holiday';
@@ -48,7 +51,7 @@ export default class AttendanceViewerItem extends Vue {
 
   get workTime(): string {
     if (
-      !this.checkTimeFormat(this.startTime) ||
+      !this.checkTimeFormat(this.startTimeProp) ||
       !this.checkTimeFormat(this.endTime) ||
       !this.checkTimeFormat(this.restTime)
     ) {
@@ -56,7 +59,7 @@ export default class AttendanceViewerItem extends Vue {
     }
     return this.calculateTimeDiff(
       this.restTime,
-      this.calculateTimeDiff(this.startTime, this.endTime)
+      this.calculateTimeDiff(this.startTimeProp, this.endTime)
     );
   }
 
@@ -67,7 +70,7 @@ export default class AttendanceViewerItem extends Vue {
   get overtimeOnHoliday(): string {
     if (this.attendanceDivision === 'holiday') {
       if (
-        !this.checkTimeFormat(this.startTime) ||
+        !this.checkTimeFormat(this.startTimeProp) ||
         !this.checkTimeFormat(this.endTime) ||
         !this.checkTimeFormat(this.restTime)
       ) {
