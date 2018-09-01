@@ -9,7 +9,7 @@
       </select>
     </th>
     <th><input :value="startTimeProp" @input="updateStartTime" type="text"></th>
-    <th><input v-model="endTime" type="text"></th>
+    <th><input :value="endTimeProp" @input="updateEndTime" type="text"></th>
     <th><input v-model="restTime" type="text"></th>
     <th>{{workTime}}</th>
     <!--<th>{{overTimeOnWorkday}}</th>
@@ -36,13 +36,18 @@ export default class AttendanceViewerItem extends Vue {
   @Prop() isShownOvertimeHolidayProp: boolean = true;
   @Prop(Date) dateProp!: Date;
   @Prop() startTimeProp!: string;
-  @Prop() endTime: string = '';
+  @Prop() endTimeProp!: string;
   @Prop() restTime: string = '';
   @Prop() attendanceDivision: string = 'work';
 
   updateStartTime(e: any) {
-    this.$emit('input', e.target.value.toString());
+    this.$emit('updateStartTime', e.target.value.toString());
   }
+
+  updateEndTime(e: any) {
+    this.$emit('updateEndTime', e.target.value.toString());
+  }
+
   mounted() {
     if (this.isWeekend(this.dateProp)) {
       this.attendanceDivision = 'holiday';
@@ -52,14 +57,14 @@ export default class AttendanceViewerItem extends Vue {
   get workTime(): string {
     if (
       !this.checkTimeFormat(this.startTimeProp) ||
-      !this.checkTimeFormat(this.endTime) ||
+      !this.checkTimeFormat(this.endTimeProp) ||
       !this.checkTimeFormat(this.restTime)
     ) {
       return '';
     }
     return this.calculateTimeDiff(
       this.restTime,
-      this.calculateTimeDiff(this.startTimeProp, this.endTime)
+      this.calculateTimeDiff(this.startTimeProp, this.endTimeProp)
     );
   }
 
@@ -71,7 +76,7 @@ export default class AttendanceViewerItem extends Vue {
     if (this.attendanceDivision === 'holiday') {
       if (
         !this.checkTimeFormat(this.startTimeProp) ||
-        !this.checkTimeFormat(this.endTime) ||
+        !this.checkTimeFormat(this.endTimeProp) ||
         !this.checkTimeFormat(this.restTime)
       ) {
         return '';
@@ -95,11 +100,11 @@ export default class AttendanceViewerItem extends Vue {
    */
   get lateNightOvertimeOnHoliday(): string {
     if (this.attendanceDivision === 'holiday') {
-      if (!this.checkTimeFormat(this.endTime)) {
+      if (!this.checkTimeFormat(this.endTimeProp)) {
         return '';
       }
-      var endTimeHours = parseInt(this.endTime.split(':')[0]);
-      var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
+      var endTimeHours = parseInt(this.endTimeProp.split(':')[0]);
+      var endTimeMinutes = parseInt(this.endTimeProp.split(':')[1]);
       if (endTimeHours == 22 && endTimeMinutes == 0) {
         return '';
       } else if (endTimeHours >= 22) {
@@ -117,11 +122,11 @@ export default class AttendanceViewerItem extends Vue {
    */
   get lateNightOverTimeOnWorkday(): string {
     if (this.attendanceDivision === 'work') {
-      if (!this.checkTimeFormat(this.endTime)) {
+      if (!this.checkTimeFormat(this.endTimeProp)) {
         return '';
       }
-      var endTimeHours = parseInt(this.endTime.split(':')[0]);
-      var endTimeMinutes = parseInt(this.endTime.split(':')[1]);
+      var endTimeHours = parseInt(this.endTimeProp.split(':')[0]);
+      var endTimeMinutes = parseInt(this.endTimeProp.split(':')[1]);
       if (endTimeHours == 22 && endTimeMinutes == 0) {
         return '';
       } else if (endTimeHours >= 22) {

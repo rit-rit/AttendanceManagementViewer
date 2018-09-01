@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <AttendanceViewerItem v-for="(dateItem,index) in dateArray" :key="index" v-bind:dateProp="dateItem" v-bind:isShownOvertimeHolidayProp="isShownOvertimeHoliday" :startTimeProp="startTime" @input="updateStartTime"></AttendanceViewerItem>
+        <AttendanceViewerItem v-for="(dateItem,index) in dateArray" :key="index" v-bind:dateProp="dateItem" v-bind:isShownOvertimeHolidayProp="isShownOvertimeHoliday" :startTimeProp="startTime" @updateStartTime="updateStartTime" :endTimeProp="endTime" @updateEndTime="updateEndTime"></AttendanceViewerItem>
       </tbody>
     </table>
     <button @click="postAttendanceData">Submit</button>
@@ -31,7 +31,7 @@ export default class AttendanceViewer extends Vue {
   dateArray: Date[] = [];
   isShownOvertimeHoliday: boolean = true;
   startTime: string = '9:00';
-  endTime: string = '';
+  endTime: string = '18:00';
   restTime: string = '';
 
   mounted(): void {
@@ -49,6 +49,9 @@ export default class AttendanceViewer extends Vue {
   }
   updateStartTime(value: string): void {
     this.startTime = value;
+  }
+  updateEndTime(value: string): void {
+    this.endTime = value;
   }
 
   postAttendanceData(): void {
