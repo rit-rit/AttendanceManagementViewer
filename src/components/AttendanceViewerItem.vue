@@ -10,7 +10,7 @@
     </th>
     <th><input :value="startTimeProp" @input="updateStartTime" type="text"></th>
     <th><input :value="endTimeProp" @input="updateEndTime" type="text"></th>
-    <th><input v-model="restTime" type="text"></th>
+    <th><input :value="restTimeProp" @input="updateRestTime" type="text"></th>
     <th>{{workTime}}</th>
     <!--<th>{{overTimeOnWorkday}}</th>
     <th>{{lateNightOverTimeOnWorkday}} </th>
@@ -37,7 +37,7 @@ export default class AttendanceViewerItem extends Vue {
   @Prop(Date) dateProp!: Date;
   @Prop() startTimeProp!: string;
   @Prop() endTimeProp!: string;
-  @Prop() restTime: string = '';
+  @Prop() restTimeProp!: string;
   @Prop() attendanceDivision: string = 'work';
 
   updateStartTime(e: any) {
@@ -46,6 +46,10 @@ export default class AttendanceViewerItem extends Vue {
 
   updateEndTime(e: any) {
     this.$emit('updateEndTime', e.target.value.toString());
+  }
+
+  updateRestTime(e: any) {
+    this.$emit('updateRestTime', e.target.value.toString());
   }
 
   mounted() {
@@ -58,12 +62,12 @@ export default class AttendanceViewerItem extends Vue {
     if (
       !this.checkTimeFormat(this.startTimeProp) ||
       !this.checkTimeFormat(this.endTimeProp) ||
-      !this.checkTimeFormat(this.restTime)
+      !this.checkTimeFormat(this.restTimeProp)
     ) {
       return '';
     }
     return this.calculateTimeDiff(
-      this.restTime,
+      this.restTimeProp,
       this.calculateTimeDiff(this.startTimeProp, this.endTimeProp)
     );
   }
@@ -77,7 +81,7 @@ export default class AttendanceViewerItem extends Vue {
       if (
         !this.checkTimeFormat(this.startTimeProp) ||
         !this.checkTimeFormat(this.endTimeProp) ||
-        !this.checkTimeFormat(this.restTime)
+        !this.checkTimeFormat(this.restTimeProp)
       ) {
         return '';
       }
