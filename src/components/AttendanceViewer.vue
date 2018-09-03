@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <AttendanceViewerItem v-for="(dateItem,index) in dateArray" :key="index" v-bind:dateProp="dateItem" v-bind:isShownOvertimeHolidayProp="isShownOvertimeHoliday" :startTimeProp="startTime" @updateStartTime="updateStartTime" :endTimeProp="endTime" @updateEndTime="updateEndTime" :restTimeProp="restTime" @updateRestTime="updateRestTime"></AttendanceViewerItem>
+        <AttendanceViewerItem v-for="(attendanceItem,index) in attendanceArray" :key="index" v-bind="attendanceItem" @updateStartTime="updateStartTime" @updateEndTime="updateEndTime" @updateRestTime="updateRestTime"></AttendanceViewerItem>
       </tbody>
     </table>
     <button @click="postAttendanceData">Submit</button>
@@ -28,11 +28,16 @@ import axios from 'axios';
   components: { AttendanceViewerItem }
 })
 export default class AttendanceViewer extends Vue {
-  dateArray: Date[] = [];
-  isShownOvertimeHoliday: boolean = true;
-  startTime: string = '9:00';
-  endTime: string = '18:00';
-  restTime: string = '';
+  attendanceArray: {
+    index: number;
+    date: Date;
+    isShownOvertimeHoliday: boolean;
+    startTime: string;
+    endTime: string;
+    restTime: string;
+    workTime: string;
+    attendanceDivision: string;
+  }[] = [];
 
   mounted(): void {
     const currentDate: Date = new Date();
@@ -42,21 +47,33 @@ export default class AttendanceViewer extends Vue {
       0
     ).getDate();
     for (var curDay: number = 1; curDay <= lastDay; curDay++) {
-      this.dateArray.push(
-        new Date(currentDate.getFullYear(), currentDate.getMonth(), curDay)
-      );
+      this.attendanceArray.push({
+        index: curDay - 1,
+        date: new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          curDay
+        ),
+        isShownOvertimeHoliday: true,
+        startTime: '',
+        endTime: '',
+        restTime: '',
+        workTime: '',
+        attendanceDivision: 'work'
+      });
     }
   }
-  updateStartTime(value: string): void {
-    this.startTime = value;
+
+  updateStartTime(value: { index: number; value: string }): void {
+    this.attendanceArray[value.index].startTime = value.value;
   }
 
-  updateEndTime(value: string): void {
-    this.endTime = value;
+  updateEndTime(value: { index: number; value: string }): void {
+    this.attendanceArray[value.index].endTime = value.value;
   }
 
-  updateRestTime(value: string): void {
-    this.restTime = value;
+  updateRestTime(value: { index: number; value: string }): void {
+    this.attendanceArray[value.index].restTime = value.value;
   }
 
   postAttendanceData(): void {
