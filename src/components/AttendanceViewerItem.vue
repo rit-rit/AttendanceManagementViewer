@@ -2,7 +2,7 @@
   <tr>
     <th>{{date.toDateString()}}</th>
     <th>
-      <select v-model="attendanceDivision">
+      <select @input="updateAttendanceDivision">
         <option value="work">Work</option>
         <option value="holiday">Holiday</option>
         <option value="substitution">Substitution holiday work</option>
@@ -39,27 +39,37 @@ export default class AttendanceViewerItem extends Vue {
   @Prop() startTime!: string;
   @Prop() endTime!: string;
   @Prop() restTime!: string;
-  @Prop() attendanceDivision: string = 'work';
+  @Prop() workTime!: string;
+  @Prop() attendanceDivision!: string;
 
-  updateStartTime(e: any) {
+  updateAttendanceDivision(e: any): void {
+    this.$emit('updateAttendanceDivision', {
+      index: this.index,
+      value: e.target.value.toString()
+    });
+  }
+  updateStartTime(e: any): void {
     this.$emit('updateStartTime', {
       index: this.index,
       value: e.target.value.toString()
     });
+    this.calcWorkTime();
   }
 
-  updateEndTime(e: any) {
+  updateEndTime(e: any): void {
     this.$emit('updateEndTime', {
       index: this.index,
       value: e.target.value.toString()
     });
+    this.calcWorkTime();
   }
 
-  updateRestTime(e: any) {
+  updateRestTime(e: any): void {
     this.$emit('updateRestTime', {
       index: this.index,
       value: e.target.value.toString()
     });
+    this.calcWorkTime();
   }
 
   mounted() {
@@ -68,18 +78,24 @@ export default class AttendanceViewerItem extends Vue {
     }
   }
 
-  get workTime(): string {
+  calcWorkTime(): void {
+    let workTime: string = '';
     if (
       !this.checkTimeFormat(this.startTime) ||
       !this.checkTimeFormat(this.endTime) ||
       !this.checkTimeFormat(this.restTime)
     ) {
-      return '';
+      workTime = '';
+    } else {
+      workTime = this.calculateTimeDiff(
+        this.restTime,
+        this.calculateTimeDiff(this.startTime, this.endTime)
+      );
     }
-    return this.calculateTimeDiff(
-      this.restTime,
-      this.calculateTimeDiff(this.startTime, this.endTime)
-    );
+    this.$emit('updateWorkTime', {
+      index: this.index,
+      value: workTime
+    });
   }
 
   /**

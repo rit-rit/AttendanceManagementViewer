@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <AttendanceViewerItem v-for="(attendanceItem,index) in attendanceArray" :key="index" v-bind="attendanceItem" @updateStartTime="updateStartTime" @updateEndTime="updateEndTime" @updateRestTime="updateRestTime"></AttendanceViewerItem>
+        <AttendanceViewerItem v-for="(attendanceItem,index) in attendanceArray" :key="index" v-bind="attendanceItem" @updateStartTime="updateStartTime" @updateEndTime="updateEndTime" @updateRestTime="updateRestTime" @updateAttendanceDivision="updateAttendanceDivision" @updateWorkTime="updateWorkTime"></AttendanceViewerItem>
       </tbody>
     </table>
     <button @click="postAttendanceData">Submit</button>
@@ -62,6 +62,13 @@ export default class AttendanceViewer extends Vue {
         attendanceDivision: 'work'
       });
     }
+  }
+
+  updateAttendanceDivision(value: { index: number; value: string }): void {
+    this.attendanceArray[value.index].attendanceDivision = value.value;
+  }
+  updateWorkTime(value: { index: number; value: string }): void {
+    this.attendanceArray[value.index].workTime = value.value;
   }
 
   updateStartTime(value: { index: number; value: string }): void {
