@@ -13,3 +13,8 @@ test('mounted function test', () => {
     ].date.getDate()
   ).toEqual(wrapper.vm.attendanceArray.length);
 });
+
+test('postAttendanceData function test.', () => {
+  const wrapper = shallowMount(AttendanceViewer);
+  expect(wrapper.vm.postAttendanceData()).toBeFalsy();
+});
