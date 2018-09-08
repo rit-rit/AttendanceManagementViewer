@@ -36,7 +36,7 @@ import { Prop, Provide } from 'vue-property-decorator';
 @Component
 export default class AttendanceViewerItem extends Vue {
   @Prop() index!: number;
-  @Prop() isShownOvertimeHolidayProp: boolean = true;
+  @Prop() isShownOvertimeHolidayProp!: boolean;
   @Prop(Date) date!: Date;
   @Prop() startTime!: string;
   @Prop() endTime!: string;
@@ -71,9 +71,16 @@ export default class AttendanceViewerItem extends Vue {
   }
 
   mounted() {
+    var value = '';
     if (this.isWeekend(this.date)) {
-      this.attendanceDivision = 'holiday';
+      value = 'holiday';
+    } else {
+      value = 'holiday';
     }
+    this.$emit('updateAttendanceDivision', {
+      index: this.index,
+      value: value
+    });
   }
 
   get workTime(): string {
