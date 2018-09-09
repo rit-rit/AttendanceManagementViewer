@@ -19,3 +19,21 @@ test('mounted function test(Holoday)', () => {
   });
   expect(wrapper.vm.attendanceDivision).toBe('holiday');
 });
+
+test('mounted function test(Weekday)', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const date: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date,
+      isShownOvertimeHoliday: false,
+      startTime: '',
+      endTime: '',
+      restTime: '',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+  expect(wrapper.vm.attendanceDivision).toBe('work');
+});
