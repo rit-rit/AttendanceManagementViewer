@@ -37,3 +37,20 @@ test('mounted function test(Weekday)', () => {
   });
   expect(wrapper.vm.attendanceDivision).toBe('work');
 });
+
+test('workTime function test', () => {
+  const date: Date = new Date();
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '18:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+  expect(wrapper.vm.workTime).toBe('08:00');
+});
