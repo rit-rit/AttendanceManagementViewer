@@ -85,9 +85,65 @@ test('overtimeOnHoliday function test.  The case is that the date is holiday.', 
       endTime: '18:00',
       restTime: '1:00',
       workTime: '',
-      attendanceDivision: 'work'
+      attendanceDivision: 'holiday'
     }
   });
 
   expect(wrapper.vm.overtimeOnHoliday).toBe('');
+});
+
+test('overtimeOnHoliday function test.  The case is that the date is holiday.', () => {
+  // 2000/1/1 00:00:00.00(Sat)
+  const tmpdate: Date = new Date(2000, 0, 1, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '18:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'holiday'
+    }
+  });
+
+  expect(wrapper.vm.overtimeOnHoliday).toBe('');
+});
+
+test('overtimeOnHoliday function test.  The case is that the date is holiday.', () => {
+  // 2000/1/1 00:00:00.00(Sat)
+  const tmpdate: Date = new Date(2000, 0, 1, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: 'a',
+      endTime: '18:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'holiday'
+    }
+  });
+  expect(wrapper.vm.overtimeOnHoliday).toBe('');
+});
+
+test('overtimeOnHoliday function test.  The case is that the date is holiday.', () => {
+  // 2000/1/1 00:00:00.00(Sat)
+  const tmpdate: Date = new Date(2000, 0, 1, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '19:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'holiday'
+    }
+  });
+
+  expect(wrapper.vm.overtimeOnHoliday).toBe('01:00');
 });
