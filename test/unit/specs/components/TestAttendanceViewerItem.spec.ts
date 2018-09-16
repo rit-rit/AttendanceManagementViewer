@@ -430,3 +430,78 @@ test('lateNightOverTimeOnHoliday function test. The case is that the date is wee
   });
   expect(wrapper.vm.lateNightOvertimeOnHoliday).toBe('');
 });
+
+test('checkTimeFormat function test. The case is that the time is correct format.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '23:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+
+  expect(wrapper.vm.checkTimeFormat('1:00')).toBeTruthy();
+});
+
+test('checkTimeFormat function test. The case is that the time is correct format.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '23:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+
+  expect(wrapper.vm.checkTimeFormat('10:30')).toBeTruthy();
+});
+
+test('checkTimeFormat function test. The case is that the time is incorrect format.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '23:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+
+  expect(wrapper.vm.checkTimeFormat('10:3')).toBeFalsy();
+});
+test('checkTimeFormat function test. The case is that the time is incorrect format.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '23:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+
+  expect(wrapper.vm.checkTimeFormat('a')).toBeFalsy();
+});
