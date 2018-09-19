@@ -3,12 +3,12 @@
     <table>
       <thead>
         <tr>
-          <th class="date">Date</th>
-          <th>Attendance Division</th>
-          <th>Start Time</th>
-          <th>End Time</th>
-          <th>Rest Time</th>
-          <th>Work Time</th>
+          <th class="date header-item-middle">Date</th>
+          <th class="header-item-middle">Attendance Division</th>
+          <th class="header-item-small">Start Time</th>
+          <th class="header-item-small">End Time</th>
+          <th class="header-item-small">Rest Time</th>
+          <th class="header-item-small">Work Time</th>
         </tr>
       </thead>
       <tbody>
@@ -113,5 +113,13 @@ thead {
 }
 th.date {
   width: 120px;
+}
+
+.header-item-middle {
+  width: 10em;
+}
+
+.header-item-small {
+  width: 6em;
 }
 </style>

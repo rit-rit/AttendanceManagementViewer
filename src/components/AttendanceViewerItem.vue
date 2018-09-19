@@ -1,17 +1,17 @@
 <template>
   <tr>
-    <th>{{date.toDateString()}}</th>
-    <th>
+    <th class="header-item-middle">{{date.toDateString()}}</th>
+    <th class="header-item-middle">
       <select @input="updateAttendanceDivision">
         <option value="work">Work</option>
         <option value="holiday">Holiday</option>
         <option value="substitution">Substitution holiday work</option>
       </select>
     </th>
-    <th><input :value="startTime" @input="updateStartTime" type="text"></th>
-    <th><input :value="endTime" @input="updateEndTime" type="text"></th>
-    <th><input :value="restTime" @input="updateRestTime" type="text"></th>
-    <th>
+    <th class="header-item-small"><input class="header-item-small" :value="startTime" @input="updateStartTime" type="text"></th>
+    <th class="header-item-small"><input class="header-item-small" :value="endTime" @input="updateEndTime" type="text"></th>
+    <th class="header-item-small"><input class="header-item-small" :value="restTime" @input="updateRestTime" type="text"></th>
+    <th class="header-item-small">
       <span>{{workTime}}</span>
     </th>
     <!--<th>{{overTimeOnWorkday}}</th>
@@ -250,5 +250,13 @@ export default class AttendanceViewerItem extends Vue {
 tr,
 th {
   border: 1px black solid;
+}
+
+.header-item-middle {
+  width: 10em;
+}
+
+.header-item-small {
+  width: 6em;
 }
 </style>
