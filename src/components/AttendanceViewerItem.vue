@@ -1,19 +1,19 @@
 <template>
   <tr>
-    <th class="header-item-middle">{{date.toDateString()}}</th>
-    <th class="header-item-middle">
+    <td class="header-item-middle">{{date.toDateString()}}</td>
+    <td class="header-item-middle">
       <select @input="updateAttendanceDivision">
         <option value="work">Work</option>
         <option value="holiday">Holiday</option>
         <option value="substitution">Substitution holiday work</option>
       </select>
-    </th>
-    <th class="header-item-small"><input class="header-item-small" :value="startTime" @input="updateStartTime" type="text"></th>
-    <th class="header-item-small"><input class="header-item-small" :value="endTime" @input="updateEndTime" type="text"></th>
-    <th class="header-item-small"><input class="header-item-small" :value="restTime" @input="updateRestTime" type="text"></th>
-    <th class="header-item-small">
+    </td>
+    <td class="header-item-small"><input :value="startTime" @input="updateStartTime" type="text"></td>
+    <td class="header-item-small"><input :value="endTime" @input="updateEndTime" type="text"></td>
+    <td class="header-item-small"><input :value="restTime" @input="updateRestTime" type="text"></td>
+    <td class="header-item-small">
       <span>{{workTime}}</span>
-    </th>
+    </td>
     <!--<th>{{overTimeOnWorkday}}</th>
     <th>{{lateNightOverTimeOnWorkday}} </th>
     <th v-if="!isShownOvertimeHolidayProp">...</th>
@@ -248,8 +248,12 @@ export default class AttendanceViewerItem extends Vue {
 </script>
 <style scoped>
 tr,
-th {
+td {
   border: 1px black solid;
+}
+
+input {
+  width: 95%;
 }
 
 .header-item-middle {
