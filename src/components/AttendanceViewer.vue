@@ -106,10 +106,10 @@ table {
 }
 th {
   border: 1px black solid;
+  background-color: #b4ebfa;
 }
 thead {
   border-bottom: 3px black double;
-  color: red;
 }
 th.date {
   width: 120px;
