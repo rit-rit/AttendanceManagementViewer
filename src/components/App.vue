@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Menu></Menu>
-    <br>
-    <span>Here is App.vue!!</span>
-    <br>
+    <!-- <Menu></Menu> -->
+    <!-- <br> -->
+    <!-- <span>Here is App.vue!!</span> -->
+    <!-- <br> -->
     <AttendanceViewer></AttendanceViewer>
 
   </div>
