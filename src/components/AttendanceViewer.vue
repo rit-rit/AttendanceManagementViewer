@@ -93,7 +93,7 @@ export default class AttendanceViewer extends Vue {
         console.log(response);
       })
       .catch(function(error) {
-        console.log(error);
+        alert('Upload failed. Please try again later.');
       });
   }
 }
