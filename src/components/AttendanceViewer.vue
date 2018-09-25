@@ -46,22 +46,45 @@ export default class AttendanceViewer extends Vue {
       currentDate.getMonth() + 1,
       0
     ).getDate();
-    for (var curDay: number = 1; curDay <= lastDay; curDay++) {
-      this.attendanceArray.push({
-        index: curDay - 1,
-        date: new Date(
-          currentDate.getFullYear(),
-          currentDate.getMonth(),
-          curDay
-        ),
-        isShownOvertimeHoliday: true,
-        startTime: '',
-        endTime: '',
-        restTime: '',
-        workTime: '',
-        attendanceDivision: 'work'
+
+    axios
+      .get('http://localhost:3000/dummy')
+      .then((response: any) => {
+        for (var curDay: number = 1; curDay <= lastDay; curDay++) {
+          this.attendanceArray.push({
+            index: curDay - 1,
+            date: new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              curDay
+            ),
+            isShownOvertimeHoliday: true,
+            startTime: '',
+            endTime: '',
+            restTime: '',
+            workTime: '',
+            attendanceDivision: 'work'
+          });
+        }
+      })
+      .catch((error: any) => {
+        for (var curDay: number = 1; curDay <= lastDay; curDay++) {
+          this.attendanceArray.push({
+            index: curDay - 1,
+            date: new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              curDay
+            ),
+            isShownOvertimeHoliday: true,
+            startTime: '',
+            endTime: '',
+            restTime: '',
+            workTime: '',
+            attendanceDivision: 'work'
+          });
+        }
       });
-    }
   }
 
   updateAttendanceDivision(value: { index: number; value: string }): void {
