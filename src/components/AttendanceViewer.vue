@@ -48,8 +48,10 @@ export default class AttendanceViewer extends Vue {
     ).getDate();
 
     axios
-      .get('http://localhost:3000/dummy')
+      .get('http://localhost:3000/get')
       .then((response: any) => {
+        console.log('success');
+        console.log(response);
         for (var curDay: number = 1; curDay <= lastDay; curDay++) {
           this.attendanceArray.push({
             index: curDay - 1,
@@ -59,11 +61,11 @@ export default class AttendanceViewer extends Vue {
               curDay
             ),
             isShownOvertimeHoliday: true,
-            startTime: '',
-            endTime: '',
-            restTime: '',
-            workTime: '',
-            attendanceDivision: 'work'
+            startTime: response.data[curDay - 1].startTime,
+            endTime: response.data[curDay - 1].endTime,
+            restTime: response.data[curDay - 1].restTime,
+            workTime: response.data[curDay - 1].workTime,
+            attendanceDivision: response.data[curDay - 1].attendanceDivision
           });
         }
       })
@@ -146,3 +148,4 @@ th.date {
   width: 6em;
 }
 </style>
+
