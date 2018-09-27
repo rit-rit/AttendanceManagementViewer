@@ -50,8 +50,6 @@ export default class AttendanceViewer extends Vue {
     axios
       .get('http://localhost:3000/get')
       .then((response: any) => {
-        console.log('success');
-        console.log(response);
         for (var curDay: number = 1; curDay <= lastDay; curDay++) {
           this.attendanceArray.push({
             index: curDay - 1,
