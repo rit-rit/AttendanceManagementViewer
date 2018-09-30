@@ -15,7 +15,7 @@
         <AttendanceViewerItem v-for="(attendanceItem,index) in attendanceArray" :key="index" v-bind="attendanceItem" @updateStartTime="updateStartTime" @updateEndTime="updateEndTime" @updateRestTime="updateRestTime" @updateAttendanceDivision="updateAttendanceDivision" @updateWorkTime="updateWorkTime"></AttendanceViewerItem>
       </tbody>
     </table>
-    <button @click="postAttendanceData">Submit</button>
+    <button class="mdc-button mdc-button--outlined" @click="postAttendanceData">Submit</button>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import AttendanceViewerItem from 'src/components/AttendanceViewerItem.vue';
 import axios from 'axios';
+
 @Component({
   components: { AttendanceViewerItem }
 })
