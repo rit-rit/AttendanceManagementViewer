@@ -298,6 +298,25 @@ test('lateNightOverTimeOnWeekday function test. The case is that the date is wee
   expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('');
 });
 
+test('lateNightOverTimeOnWeekday function test. The case is that the date is weekday.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: 'aaa',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+
+  expect(wrapper.vm.lateNightOverTimeOnWorkday).toBe('');
+});
+
 test('lateNightOverTimeOnWeekday function test. The case is that the date is holiday.', () => {
   // 2000/1/2 00:00:00.00(Sun)
   const tmpdate: Date = new Date(2000, 0, 2, 0, 0, 0, 0);
