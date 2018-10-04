@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td class="header-item-middle">{{date.toDateString()}}</td>
+    <td class="header-item-middle">{{date.toLocaleDateString()}}</td>
     <td class="header-item-middle">
       <select @input="updateAttendanceDivision">
         <option value="work">Work</option>
