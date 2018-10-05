@@ -1,21 +1,26 @@
 <template>
   <div>
-    <table>
-      <thead>
-        <tr>
-          <th class="date header-item-middle">Date</th>
-          <th class="header-item-middle">Attendance Division</th>
-          <th class="header-item-small">Start Time</th>
-          <th class="header-item-small">End Time</th>
-          <th class="header-item-small">Rest Time</th>
-          <th class="header-item-small">Work Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <AttendanceViewerItem v-for="(attendanceItem,index) in attendanceArray" :key="index" v-bind="attendanceItem" @updateStartTime="updateStartTime" @updateEndTime="updateEndTime" @updateRestTime="updateRestTime" @updateAttendanceDivision="updateAttendanceDivision" @updateWorkTime="updateWorkTime"></AttendanceViewerItem>
-      </tbody>
-    </table>
-    <button class="mdc-button mdc-button--outlined" @click="postAttendanceData">Submit</button>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th class="date header-item-middle">Date</th>
+            <th class="header-item-middle">Attendance Division</th>
+            <th class="header-item-small">Start Time</th>
+            <th class="header-item-small">End Time</th>
+            <th class="header-item-small">Rest Time</th>
+            <th class="header-item-small">Work Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <AttendanceViewerItem v-for="(attendanceItem,index) in attendanceArray" :key="index" v-bind="attendanceItem" @updateStartTime="updateStartTime" @updateEndTime="updateEndTime" @updateRestTime="updateRestTime" @updateAttendanceDivision="updateAttendanceDivision" @updateWorkTime="updateWorkTime"></AttendanceViewerItem>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <button class="mdc-button mdc-button--outlined" @click="completeTime">Auto Complete</button>
+      <button class="mdc-button mdc-button--raised" @click="postAttendanceData">Submit</button>
+    </div>
   </div>
 </template>
 
