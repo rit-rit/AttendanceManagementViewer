@@ -2,7 +2,7 @@
   <tr>
     <td class="header-item-middle">{{date.toLocaleDateString()}}</td>
     <td class="header-item-middle">
-      <select @input="updateAttendanceDivision">
+      <select :value="attendanceDivision" @input="updateAttendanceDivision">
         <option value="work">Work</option>
         <option value="holiday">Holiday</option>
         <option value="substitution">Substitution holiday work</option>
@@ -75,7 +75,7 @@ export default class AttendanceViewerItem extends Vue {
     if (this.isWeekend(this.date)) {
       value = 'holiday';
     } else {
-      value = 'holiday';
+      value = 'work';
     }
     this.$emit('updateAttendanceDivision', {
       index: this.index,
