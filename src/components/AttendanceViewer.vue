@@ -87,7 +87,7 @@ export default class AttendanceViewer extends Vue {
             endTime: '',
             restTime: '',
             workTime: '',
-            attendanceDivision: 'work'
+            attendanceDivision: ''
           });
         }
       });
@@ -124,6 +124,32 @@ export default class AttendanceViewer extends Vue {
       .catch(function(error) {
         alert('Upload failed. Please try again later.');
       });
+  }
+
+  completeTime(): void {
+    console.log('start');
+    for (let i: number = 0; i < this.attendanceArray.length; i++) {
+      console.log('in');
+      if (
+        this.attendanceArray[i].attendanceDivision === 'work' &&
+        this.attendanceArray[i].startTime === '' &&
+        this.attendanceArray[i].endTime === ''
+      ) {
+        Vue.set(this.attendanceArray, i, {
+          index: this.attendanceArray[i].index,
+          date: this.attendanceArray[i].date,
+          isShownOvertimeHoliday: this.attendanceArray[i]
+            .isShownOvertimeHoliday,
+          startTime: '9:00',
+          endTime: '18:00',
+          restTime: '',
+          workTime: '',
+          attendanceDivision: 'work'
+        });
+        console.log(this.attendanceArray[i]);
+      }
+    }
+    console.log('end');
   }
 }
 </script>
