@@ -2,7 +2,7 @@
   <tr>
     <td class="header-item-middle">{{date.toLocaleDateString()}}</td>
     <td class="header-item-middle">
-      <select :value="attendanceDivision" @input="updateAttendanceDivision">
+      <select class="attendanceDivision" :value="attendanceDivision" @input="updateAttendanceDivision">
         <option value="work">Work</option>
         <option value="holiday">Holiday</option>
         <option value="substitution">Substitution holiday work</option>

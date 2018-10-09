@@ -525,6 +525,7 @@ test('checkTimeFormat function test. The case is that the time is incorrect form
 
   expect(wrapper.vm.checkTimeFormat('10:3')).toBeFalsy();
 });
+
 test('checkTimeFormat function test. The case is that the time is incorrect format.', () => {
   // 2000/1/3 00:00:00.00(Mon)
   const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
@@ -542,4 +543,32 @@ test('checkTimeFormat function test. The case is that the time is incorrect form
   });
 
   expect(wrapper.vm.checkTimeFormat('a')).toBeFalsy();
+});
+
+test('updateAttendanceDivision function test.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '23:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+  const input = wrapper.find('.attendanceDivision');
+  input.element.nodeValue = 'work';
+  input.trigger('input');
+  expect(wrapper.emitted().updateAttendanceDivision).toBeTruthy();
+  expect(wrapper.emitted().updateAttendanceDivision.length).toBe(2);
+  expect(wrapper.emitted().updateAttendanceDivision[1]).toEqual([
+    {
+      index: 0,
+      value: 'work'
+    }
+  ]);
 });
