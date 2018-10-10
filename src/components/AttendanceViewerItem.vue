@@ -8,7 +8,7 @@
         <option value="substitution">Substitution holiday work</option>
       </select>
     </td>
-    <td class="header-item-small"><input :value="startTime" @input="updateStartTime" type="text"></td>
+    <td class="header-item-small"><input class="startTime" :value="startTime" @input="updateStartTime" type="text"></td>
     <td class="header-item-small"><input :value="endTime" @input="updateEndTime" type="text"></td>
     <td class="header-item-small"><input :value="restTime" @input="updateRestTime" type="text"></td>
     <td class="header-item-small">
@@ -49,6 +49,7 @@ export default class AttendanceViewerItem extends Vue {
       value: e.target.value.toString()
     });
   }
+
   updateStartTime(e: any): void {
     this.$emit('updateStartTime', {
       index: this.index,

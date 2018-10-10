@@ -572,3 +572,31 @@ test('updateAttendanceDivision function test.', () => {
     }
   ]);
 });
+
+test('updateAttendanceDivision function test.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '23:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+  const input = wrapper.find('.startTime');
+  input.element.nodeValue = '9:00';
+  input.trigger('input');
+  expect(wrapper.emitted().updateStartTime).toBeTruthy();
+  expect(wrapper.emitted().updateStartTime.length).toBe(1);
+  expect(wrapper.emitted().updateStartTime[0]).toEqual([
+    {
+      index: 0,
+      value: '9:00'
+    }
+  ]);
+});
