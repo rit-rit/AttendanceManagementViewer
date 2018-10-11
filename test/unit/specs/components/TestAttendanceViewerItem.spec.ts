@@ -573,7 +573,7 @@ test('updateAttendanceDivision function test.', () => {
   ]);
 });
 
-test('updateAttendanceDivision function test.', () => {
+test('updateStartTime function test.', () => {
   // 2000/1/3 00:00:00.00(Mon)
   const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
   const wrapper = mount(AttendanceViewerItem, {
@@ -597,6 +597,34 @@ test('updateAttendanceDivision function test.', () => {
     {
       index: 0,
       value: '9:00'
+    }
+  ]);
+});
+
+test('updateEndTime function test.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '23:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+  const input = wrapper.find('.endTime');
+  input.element.nodeValue = '23:00';
+  input.trigger('input');
+  expect(wrapper.emitted().updateEndTime).toBeTruthy();
+  expect(wrapper.emitted().updateEndTime.length).toBe(1);
+  expect(wrapper.emitted().updateEndTime[0]).toEqual([
+    {
+      index: 0,
+      value: '23:00'
     }
   ]);
 });

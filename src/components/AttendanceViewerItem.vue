@@ -9,7 +9,7 @@
       </select>
     </td>
     <td class="header-item-small"><input class="startTime" :value="startTime" @input="updateStartTime" type="text"></td>
-    <td class="header-item-small"><input :value="endTime" @input="updateEndTime" type="text"></td>
+    <td class="header-item-small"><input class="endTime" :value="endTime" @input="updateEndTime" type="text"></td>
     <td class="header-item-small"><input :value="restTime" @input="updateRestTime" type="text"></td>
     <td class="header-item-small">
       <span>{{workTime}}</span>
