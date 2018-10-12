@@ -628,3 +628,31 @@ test('updateEndTime function test.', () => {
     }
   ]);
 });
+
+test('updateRestTime function test.', () => {
+  // 2000/1/3 00:00:00.00(Mon)
+  const tmpdate: Date = new Date(2000, 0, 3, 0, 0, 0, 0);
+  const wrapper = mount(AttendanceViewerItem, {
+    propsData: {
+      index: 0,
+      date: tmpdate,
+      isShownOvertimeHoliday: false,
+      startTime: '9:00',
+      endTime: '23:00',
+      restTime: '1:00',
+      workTime: '',
+      attendanceDivision: 'work'
+    }
+  });
+  const input = wrapper.find('.restTime');
+  input.element.nodeValue = '1:00';
+  input.trigger('input');
+  expect(wrapper.emitted().updateRestTime).toBeTruthy();
+  expect(wrapper.emitted().updateRestTime.length).toBe(1);
+  expect(wrapper.emitted().updateRestTime[0]).toEqual([
+    {
+      index: 0,
+      value: '1:00'
+    }
+  ]);
+});
